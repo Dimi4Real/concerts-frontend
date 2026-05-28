@@ -1,66 +1,72 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
+import Link from "next/link";
+import { useEffect } from "react";
+import useListData from "@/hooks/useListData";
+import { Spinner } from "reactstrap";
 
 export default function Home() {
+  const { getData, loading, data } = useListData();
+
+  useEffect(() => {
+    getData('event/get-list');
+  }, []);
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+      <div>
+        {/* Hero sekcija */}
+        <div className="hero-section">
+          <h1>🎵 Concerts App</h1>
+          <p>Pronađite i istražite najbolje koncerte u vašem gradu</p>
+          <div>
+            <Link href="/events" className="btn me-2">
+              🎟️ Pogledaj koncerte
+            </Link>
+            <Link href="/artists" className="btn">
+              🎤 Izvođači
+            </Link>
+          </div>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Najnoviji koncerti */}
+        <div className="d-flex justify-content-between align-items-center mb-3 mt-4">
+          <h3 style={{fontSize: '1.5rem', fontWeight: '700', margin: 0}}>
+            Najnoviji koncerti
+          </h3>
+          <Link href="/events" className="btn btn-outline-primary btn-sm">
+            Vidi sve →
+          </Link>
         </div>
-      </main>
-    </div>
+
+        {loading && (
+            <div className="text-center py-5">
+              <Spinner />
+            </div>
+        )}
+
+        <div className="row">
+          {data && data.slice(0, 6).map((event) => (
+              <div key={event.id} className="col-md-4 mb-3">
+                <div className="card h-100">
+                  <div className="card-body p-4">
+                    <h5 className="card-title mb-3">{event.name}</h5>
+                    <p className="text-muted mb-2">
+                      🎤 <strong>{event.artistName}</strong>
+                    </p>
+                    <p className="text-muted mb-2">
+                      📍 {event.venueName}, {event.venueCity}
+                    </p>
+                    <p className="text-muted mb-2">
+                      📅 {new Date(event.eventDate).toLocaleDateString('sr-RS')}
+                    </p>
+                    <hr />
+                    <p className="fw-bold text-primary mb-0">
+                      🎟️ {event.ticketPrice?.toLocaleString()} RSD
+                    </p>
+                  </div>
+                </div>
+              </div>
+          ))}
+        </div>
+      </div>
   );
 }
