@@ -19,7 +19,7 @@ export default function Header() {
         <header>
             <div className="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
                 <Link href="/" className="d-flex align-items-center text-dark text-decoration-none">
-                    <span className="fs-4">🎵 Concerts App</span>
+                    <span className="fs-4">🎵 Concerts</span>
                 </Link>
 
                 <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto align-items-center">

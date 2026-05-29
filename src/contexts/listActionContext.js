@@ -22,7 +22,11 @@ const listActionReducer = (state, action) => {
         case listAction.CREATE:
             return { ...state, type: listAction.CREATE };
         case listAction.RESET:
-            return initialState;
+            return {
+                ...state,
+                type: null,
+                row: {}
+            };
         default:
             return state;
     }

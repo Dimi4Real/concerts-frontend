@@ -15,7 +15,7 @@ export default function Home() {
       <div>
         {/* Hero sekcija */}
         <div className="hero-section">
-          <h1>🎵 Concerts App</h1>
+          <h1>🎵 Concerts</h1>
           <p>Pronađite i istražite najbolje koncerte u vašem gradu</p>
           <div>
             <Link href="/events" className="btn me-2">

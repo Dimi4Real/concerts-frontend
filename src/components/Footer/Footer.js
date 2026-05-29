@@ -3,7 +3,7 @@ export default function Footer() {
         <footer className="pt-4 my-md-5 pt-md-5 border-top">
             <div className="row">
                 <div className="col-12 col-md">
-                    <span className="fs-4">🎵 Concerts App</span>
+                    <span className="fs-4">🎵 Concerts</span>
                     <small className="d-block mb-3 text-muted">© 2025</small>
                 </div>
                 <div className="col-6 col-md">
