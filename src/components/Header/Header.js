@@ -32,6 +32,9 @@ export default function Header() {
                     <Link href="/venues" className="me-3 py-2 text-dark text-decoration-none">
                         Mesta
                     </Link>
+                    <Link href="/genres" className="me-3 py-2 text-dark text-decoration-none">
+                        Žanrovi
+                    </Link>
 
                     {state.isAuthenticated ? (
                         <>
